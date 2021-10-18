@@ -5,6 +5,27 @@
       "title": "Citizen Kane",
       "watched": false,
       "created_at": "Monday, November 30th 2020, 8:19 am"
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 4
+    },
+    {
+      "title": "Water World",
+      "watched": false,
+      "created_at": "2021-10-18T12:25:46-07:00",
+      "id": 5
+    },
+    {
+      "title": "Wayne's World",
+      "watched": false,
+      "created_at": "2021-10-18T12:28:36-07:00",
+      "id": 6
     }
   ]
 }
