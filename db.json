@@ -1,0 +1,10 @@
+{
+  "movies": [
+    {
+      "id": 1,
+      "title": "Citizen Kane",
+      "watched": false,
+      "created_at": "Monday, November 30th 2020, 8:19 am"
+    }
+  ]
+}
