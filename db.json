@@ -1,24 +1,8 @@
 {
   "movies": [
     {
-      "id": 1,
-      "title": "Citizen Kane",
-      "watched": false,
-      "created_at": "Monday, November 30th 2020, 8:19 am"
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 4
-    },
-    {
-      "title": "Water World",
-      "watched": false,
-      "created_at": "2021-10-18T12:25:46-07:00",
+      "title": "Water World 2",
+      "updated_at": "2021-10-19T10:22:22-04:00",
       "id": 5
     },
     {
@@ -26,6 +10,29 @@
       "watched": false,
       "created_at": "2021-10-18T12:28:36-07:00",
       "id": 6
+    },
+    {
+      "title": "Blues Brothers",
+      "watched": false,
+      "created_at": "2021-10-19T09:46:05-04:00",
+      "id": 7
+    },
+    {
+      "title": "Star Wars",
+      "watched": false,
+      "created_at": "2021-10-19T10:06:14-04:00",
+      "id": 8
+    },
+    {
+      "title": "Empire of the Sun",
+      "watched": false,
+      "created_at": "2021-10-19T10:07:10-04:00",
+      "id": 9
+    },
+    {
+      "title": "Clueless 2",
+      "updated_at": "2021-10-19T10:32:48-04:00",
+      "id": 10
     }
   ]
 }

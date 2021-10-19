@@ -29,9 +29,14 @@ function listMovies() {
 
 // unfinished function
 function renderMovieText(li, movie) {
-    li.innerHTML = `<span>${movie.title}</span>${
-        movie.updated_at ? moment(movie.updated_at).format('MMM DD,YYYY') : ''
-    }<i class="ml2 dark-red fas fa-times delete" ></i > <i class="ml3 fas fa-edit edit"></i>`;
+    li.innerHTML = `<div class='movie-item'>
+        <span>${movie.title}</span>${movie.updated_at ? " edited: " + moment(movie.updated_at).format('MMM,DD,YYYY') : movie.created_at ? " created at: " + moment(movie.created_at).format('MMM,DD,YYYY') : ""}
+        <button class='delete'>DELETE</button>
+        <button class='edit'>EDIT</button>
+        <button class='watched'>WATCHED</button>
+        </div>
+
+        `;
 }
 
 function createMovie(movieText) {
@@ -55,5 +60,41 @@ submitButton.addEventListener('click', (e) => {
     createMovie(movieText);
     form.reset();
 });
+
+function deleteMovie(data) {
+    fetch(url + '/' + `${data.parentElement.parentElement.id}`, {
+    method: 'DELETE',})
+    .then(() => data.parentElement.parentElement.remove())
+}
+
+function updateMovie(edited) {
+    const movieText = document.getElementById('movie-field').value
+    fetch(url + '/' + `${edited.parentElement.parentElement.id}`,{
+        method: 'PUT',
+        headers: { 'Content-Type' : 'application/json' },
+        body: JSON.stringify({
+            title: movieText,
+            updated_at: moment().format()
+        })
+    
+})
+        .then(res => res.json())
+        .then(data => {
+            renderMovieText(edited.parentElement.parentElement, data)
+        })
+
+}
+movieList.addEventListener('click', (e) => {
+    if (e.target.classList.contains('delete')) {
+        deleteMovie(e.target)
+    }
+    if (e.target.classList.contains('edit')) {
+        updateMovie(e.target)
+    }
+})
+
+
+
+
 
 listMovies();
