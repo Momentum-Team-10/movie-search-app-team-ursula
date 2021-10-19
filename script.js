@@ -30,7 +30,13 @@ function listMovies() {
 // unfinished function
 function renderMovieText(li, movie) {
     li.innerHTML = `<div class='movie-item'>
-        <span>${movie.title}</span>${movie.updated_at ? " edited: " + moment(movie.updated_at).format('MMM,DD,YYYY') : movie.created_at ? " created at: " + moment(movie.created_at).format('MMM,DD,YYYY') : ""}
+        <span>${movie.title}</span>${
+        movie.updated_at
+            ? ' edited: ' + moment(movie.updated_at).format('MMM,DD,YYYY')
+            : movie.created_at
+            ? ' created at: ' + moment(movie.created_at).format('MMM,DD,YYYY')
+            : ''
+    }
         <button class='delete'>DELETE</button>
         <button class='edit'>EDIT</button>
         <button id="${movie.id}" class='watched'>NOT WATCHED</button>
@@ -38,6 +44,8 @@ function renderMovieText(li, movie) {
 
         `;
 }
+
+console.log(document.querySelectorAll('.watched').parentElement);
 
 function createMovie(movieText) {
     fetch(url, {
@@ -63,56 +71,48 @@ submitButton.addEventListener('click', (e) => {
 
 function deleteMovie(data) {
     fetch(url + '/' + `${data.parentElement.parentElement.id}`, {
-    method: 'DELETE',})
-    .then(() => data.parentElement.parentElement.remove())
+        method: 'DELETE',
+    }).then(() => data.parentElement.parentElement.remove());
 }
 
 function updateMovie(edited) {
-    const movieText = document.getElementById('movie-field').value
-    fetch(url + '/' + `${edited.parentElement.parentElement.id}`,{
+    const movieText = document.getElementById('movie-field').value;
+    fetch(url + '/' + `${edited.parentElement.parentElement.id}`, {
         method: 'PATCH',
-        headers: { 'Content-Type' : 'application/json' },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
             title: movieText,
             updated_at: moment().format(),
-            
-        })
-    
-})
-        .then(res => res.json())
-        .then(data => {
-            renderMovieText(edited.parentElement.parentElement, data)
-        })
-
+        }),
+    })
+        .then((res) => res.json())
+        .then((data) => {
+            renderMovieText(edited.parentElement.parentElement, data);
+        });
 }
+
 movieList.addEventListener('click', (e) => {
     if (e.target.classList.contains('delete')) {
-        deleteMovie(e.target)
+        deleteMovie(e.target);
     }
     if (e.target.classList.contains('edit')) {
-        updateMovie(e.target)
+        updateMovie(e.target);
     }
-})
+    if (e.target.classList.contains('watched')) {
+        watchedButton(e.target);
+    }
+});
 
 function watchedButton(movieObj) {
-    const buttontext = document.getElementById(`${movieObj.id}`)
-    if (movieObj.watched === true) {
-                fetch(url + '/' + `${movieObj.id}`, {
-                    method: 'PATCH',
-                    headers: { 'Content-Type' : 'application/json' },
-                    body: JSON.stringify({
-                    watched: false
-            
-    }) 
-})} else if (movieObj.watched === false) {
-        fetch(url + '/' + `${movieObj.id}`, {
-            method: 'PATCH',
-            headers: { 'Content-Type' : 'application/json' },
-            body: JSON.stringify({
-            watched: true
-            })
-            
-        })}}
-
+    console.log(movieObj);
+    const buttontext = document.getElementById(`${movieObj.id}`);
+    fetch(url + '/' + `${movieObj.id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            watched: false,
+        }),
+    });
+}
 
 listMovies();
