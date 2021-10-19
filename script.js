@@ -106,13 +106,26 @@ movieList.addEventListener('click', (e) => {
 function watchedButton(movieObj) {
     console.log(movieObj);
     const buttontext = document.getElementById(`${movieObj.id}`);
-    fetch(url + '/' + `${movieObj.id}`, {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            watched: false,
-        }),
-    });
+    const res = await fetch(url + '/' + `${movieObj.id}`)
+    const data = await res.json()
+    if (data.watched === true) {
+        fetch(url + '/' + `${movieObj.id}`, {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                watched: false,
+            })
+        })
+    }
+    if (data.watched === false) {
+        fetch(url + '/' + `${movieObj.id}`, {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                watched: true,
+            })
+        })
+    }
 }
 
 listMovies();
