@@ -104,12 +104,14 @@ function watchedButton(movieObj) {
                     watched: false
             
     }) 
-}} else if (movieObj.watched === false) {
-    fetch(url + '/' + `${movieObj.id}`, {
-        method: 'PATCH',
-        headers: { 'Content-Type' : 'application/json' },
-        body: JSON.stringify({
-        watched: true
+})} else if (movieObj.watched === false) {
+        fetch(url + '/' + `${movieObj.id}`, {
+            method: 'PATCH',
+            headers: { 'Content-Type' : 'application/json' },
+            body: JSON.stringify({
+            watched: true
+            })
+            
         })}}
 
 
