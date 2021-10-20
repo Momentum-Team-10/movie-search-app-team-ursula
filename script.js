@@ -100,32 +100,44 @@ movieList.addEventListener('click', (e) => {
     }
     if (e.target.classList.contains('watched')) {
         watchedButton(e.target);
+        
+
     }
 });
+
+movieList.addEventListener('click', (e) => {
+    if (e.target.classList.contains('watched')) {
+        console.log(e.target);
+}})
 
 function watchedButton(movieObj) {
     console.log(movieObj);
     const buttontext = document.getElementById(`${movieObj.id}`);
-    const res = await fetch(url + '/' + `${movieObj.id}`)
-    const data = await res.json()
-    if (data.watched === true) {
-        fetch(url + '/' + `${movieObj.id}`, {
-            method: 'PATCH',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                watched: false,
-            })
-        })
-    }
-    if (data.watched === false) {
-        fetch(url + '/' + `${movieObj.id}`, {
-            method: 'PATCH',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                watched: true,
-            })
-        })
-    }
-}
+    console.log(movieObj.innerText)
+        fetch(url + '/' + `${movieObj.id}`)
+            .then(res => res.json())
+            .then(data => {
+                if (data.watched === true) {
+                    fetch(url + '/' + `${movieObj.id}`, {
+                        method: 'PATCH',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            watched: false
+
+                    })
+                }
+                )} else {
+                    fetch(url + '/' + `${movieObj.id}`, {
+                    method: 'PATCH',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        watched: true
+
+                    })}) 
+            
+                    
+            
+    
+}})}
 
 listMovies();
