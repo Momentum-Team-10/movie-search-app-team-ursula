@@ -4,19 +4,13 @@
       "title": "Clueless 2",
       "updated_at": "2021-10-19T10:32:48-04:00",
       "id": 10,
-      "watched": false
+      "watched": true
     },
     {
       "title": "Pulp Fiction",
       "watched": false,
       "created_at": "2021-10-20T10:06:58-04:00",
       "id": 11
-    },
-    {
-      "title": "What the Hell",
-      "watched": true,
-      "created_at": "2021-10-20T10:17:22-04:00",
-      "id": 12
     }
   ]
 }

@@ -1,0 +1,8 @@
+.movie-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 650px;
+    align-items: center;
+}
+

@@ -29,7 +29,7 @@ function listMovies() {
 
 // unfinished function
 function renderMovieText(li, movie) {
-    li.innerHTML = `<div class='movie-item'>
+    li.innerHTML = `<div class='movie-item card'>
         <span>${movie.title}</span>${
         movie.updated_at
             ? ' edited: ' + moment(movie.updated_at).format('MMM,DD,YYYY')
@@ -37,9 +37,9 @@ function renderMovieText(li, movie) {
             ? ' created at: ' + moment(movie.created_at).format('MMM,DD,YYYY')
             : ''
     }
-        <button class='delete'>DELETE</button>
+        <button class='delete error'>DELETE</button>
         <button class='edit'>EDIT</button>
-        <button id="${movie.id}" class='watched'>NOT WATCHED</button>
+        <button id="${movie.id}" class='watched warning'>NOT WATCHED</button>
         </div>
 
         `;
@@ -100,7 +100,7 @@ movieList.addEventListener('click', (e) => {
     }
     if (e.target.classList.contains('watched')) {
         watchedButton(e.target);
-        e.target.innerText === 'NOT WATCHED' ? e.target.innerText = 'WATCHED': e.target.innerText = 'NOT WATCHED'
+        e.target.innerText === 'NOT WATCHED' ? (e.target.innerText = 'WATCHED', e.target.classList.remove('warning'), e.target.classList.add('success')): e.target.innerText = 'NOT WATCHED'
 
 
     }
