@@ -100,20 +100,15 @@ movieList.addEventListener('click', (e) => {
     }
     if (e.target.classList.contains('watched')) {
         watchedButton(e.target);
-        
+        e.target.innerText === 'NOT WATCHED' ? e.target.innerText = 'WATCHED': e.target.innerText = 'NOT WATCHED'
+
 
     }
 });
 
-movieList.addEventListener('click', (e) => {
-    if (e.target.classList.contains('watched')) {
-        console.log(e.target);
-}})
-
 function watchedButton(movieObj) {
     console.log(movieObj);
     const buttontext = document.getElementById(`${movieObj.id}`);
-    console.log(movieObj.innerText)
         fetch(url + '/' + `${movieObj.id}`)
             .then(res => res.json())
             .then(data => {
