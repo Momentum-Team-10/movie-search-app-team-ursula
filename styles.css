@@ -2,7 +2,45 @@
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
-    width: 650px;
+    max-width: 850px;
     align-items: center;
 }
 
+.watched {
+    margin: 5.28px 0px !important;
+}
+
+#movie-form {
+    padding: 50px 50px 15px 50px;
+    max-width: 500px;
+}
+
+#submit-movie {
+    margin: 10px 0px 50px 0px;
+}
+
+#delete,
+#error,
+#watched {
+    font-size: 8px !important;
+}
+
+#intro {
+    display: flex;
+    justify-content: center;
+    color: whitesmoke;
+}
+
+#submit-field {
+    display: flex;
+    justify-content: center;
+}
+
+ul {
+    margin: 0px 0px 0px 50px !important;
+}
+
+body {
+    background-image: url(./travolta.gif) !important;
+    background-repeat: repeat !important;
+}

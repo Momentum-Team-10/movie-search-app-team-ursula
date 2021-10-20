@@ -32,9 +32,10 @@ function renderMovieText(li, movie) {
     li.innerHTML = `<div class='movie-item card'>
         <span>${movie.title}</span>${
         movie.updated_at
-            ? ' edited: ' + moment(movie.updated_at).format('MMM,DD,YYYY')
+            ? ' Edited on: ' + moment(movie.updated_at).format('MMM,DD,YYYY')
             : movie.created_at
-            ? ' created at: ' + moment(movie.created_at).format('MMM,DD,YYYY')
+            ? ' Added to the List at: ' +
+              moment(movie.created_at).format('MMM,DD,YYYY')
             : ''
     }
         <button class='delete error'>DELETE</button>
@@ -100,39 +101,40 @@ movieList.addEventListener('click', (e) => {
     }
     if (e.target.classList.contains('watched')) {
         watchedButton(e.target);
-        e.target.innerText === 'NOT WATCHED' ? (e.target.innerText = 'WATCHED', e.target.classList.remove('warning'), e.target.classList.add('success')): e.target.innerText = 'NOT WATCHED'
-
-
+        e.target.innerText === 'NOT WATCHED'
+            ? ((e.target.innerText = 'WATCHED'),
+              e.target.classList.remove('warning'),
+              e.target.classList.add('success'))
+            : ((e.target.innerText = 'NOT WATCHED'),
+              e.target.classList.remove('success'),
+              e.target.classList.add('warning'));
     }
 });
 
 function watchedButton(movieObj) {
     console.log(movieObj);
     const buttontext = document.getElementById(`${movieObj.id}`);
-        fetch(url + '/' + `${movieObj.id}`)
-            .then(res => res.json())
-            .then(data => {
-                if (data.watched === true) {
-                    fetch(url + '/' + `${movieObj.id}`, {
-                        method: 'PATCH',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({
-                            watched: false
-
-                    })
-                }
-                )} else {
-                    fetch(url + '/' + `${movieObj.id}`, {
+    fetch(url + '/' + `${movieObj.id}`)
+        .then((res) => res.json())
+        .then((data) => {
+            if (data.watched === true) {
+                fetch(url + '/' + `${movieObj.id}`, {
                     method: 'PATCH',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
-                        watched: true
-
-                    })}) 
-            
-                    
-            
-    
-}})}
+                        watched: false,
+                    }),
+                });
+            } else {
+                fetch(url + '/' + `${movieObj.id}`, {
+                    method: 'PATCH',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        watched: true,
+                    }),
+                });
+            }
+        });
+}
 
 listMovies();
